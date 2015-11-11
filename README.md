@@ -1,13 +1,13 @@
-# react-component-template
+# react-component-router
 
-[![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/nkbt/help)
+[![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/in-flux/help)
 
-[![Circle CI](https://circleci.com/gh/nkbt/react-component-template.svg?style=svg)](https://circleci.com/gh/nkbt/react-component-template)
-[![Coverage Status](https://coveralls.io/repos/nkbt/react-component-template/badge.svg?branch=master)](https://coveralls.io/r/nkbt/react-component-template?branch=master)
-[![Dependency Status](https://david-dm.org/nkbt/react-component-template.svg)](https://david-dm.org/nkbt/react-component-template)
-[![devDependency Status](https://david-dm.org/nkbt/react-component-template/dev-status.svg)](https://david-dm.org/nkbt/react-component-template#info=devDependencies)
+[![Circle CI](https://circleci.com/gh/in-flux/react-component-router.svg?style=svg)](https://circleci.com/gh/in-flux/react-component-router)
+[![Coverage Status](https://coveralls.io/repos/in-flux/react-component-router/badge.svg?branch=master)](https://coveralls.io/r/in-flux/react-component-router?branch=master)
+[![Dependency Status](https://david-dm.org/in-flux/react-component-router.svg)](https://david-dm.org/in-flux/react-component-router)
+[![devDependency Status](https://david-dm.org/in-flux/react-component-router/dev-status.svg)](https://david-dm.org/in-flux/react-component-router#info=devDependencies)
 
-Base for React Components
+Base for React ReactComponentRouters
 
 ## Reason
 
@@ -30,7 +30,7 @@ Developing and publishing multiple React components requires a lot of work to ke
 1. Add as remote
 
   ```sh
-  git remote add template git@github.com:nkbt/react-component-template.git
+  git remote add template git@github.com:in-flux/react-component-router.git
   ```
 
 2. Merge to existing repo

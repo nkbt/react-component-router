@@ -1,4 +1,4 @@
-import Component from './Component';
+import ReactComponentRouter from './ReactComponentRouter';
 
 
-export default Component;
+export default ReactComponentRouter;

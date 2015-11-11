@@ -1,12 +1,12 @@
 import React from 'react';
-import Component from '..';
+import ReactComponentRouter from '..';
 
 
 const App = React.createClass({
   render() {
     return (
       <div>
-        <Component />
+        <ReactComponentRouter />
       </div>
     );
   }
