@@ -1,7 +1,7 @@
 {
   "name": "react-component-router",
-  "version": "1.0.0",
-  "description": "React component",
+  "version": "0.0.0",
+  "description": "Official ComponentRouter bindings for React",
   "main": "lib/index.js",
   "scripts": {
     "babel-node": "babel-node --presets es2015,react --plugins transform-es2015-modules-commonjs,transform-object-rest-spread",
