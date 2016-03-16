@@ -1,11 +1,12 @@
-# react-component-router
+# react-component-router [![npm](https://img.shields.io/npm/v/react-component-router.svg?style=flat-square)](https://www.npmjs.com/package/react-component-router)
 
-[![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/in-flux/help)
+[![Gitter](https://img.shields.io/gitter/room/nkbt/help.svg?style=flat-square)](https://gitter.im/nkbt/help)
 
-[![Circle CI](https://circleci.com/gh/in-flux/react-component-router.svg?style=svg)](https://circleci.com/gh/in-flux/react-component-router)
-[![Coverage Status](https://coveralls.io/repos/in-flux/react-component-router/badge.svg?branch=master)](https://coveralls.io/r/in-flux/react-component-router?branch=master)
-[![Dependency Status](https://david-dm.org/in-flux/react-component-router.svg)](https://david-dm.org/in-flux/react-component-router)
-[![devDependency Status](https://david-dm.org/in-flux/react-component-router/dev-status.svg)](https://david-dm.org/in-flux/react-component-router#info=devDependencies)
+[![CircleCI](https://img.shields.io/circleci/project/in-flux/react-component-router.svg?style=flat-square&label=nix-build)](https://circleci.com/gh/in-flux/react-component-router)
+[![AppVeyor](https://img.shields.io/appveyor/ci/nkbt/react-component-router.svg?style=flat-square&label=win-build)](https://ci.appveyor.com/project/nkbt/react-component-router)
+[![Coverage](https://img.shields.io/codecov/c/github/in-flux/react-component-router.svg?style=flat-square)](https://codecov.io/github/in-flux/react-component-router?branch=master)
+[![Dependencies](https://img.shields.io/david/in-flux/react-component-router.svg?style=flat-square)](https://david-dm.org/in-flux/react-component-router)
+[![Dev Dependencies](https://img.shields.io/david/dev/in-flux/react-component-router.svg?style=flat-square)](https://david-dm.org/in-flux/react-component-router#info=devDependencies)
 
 Official ComponentRouter bindings for React.
 
