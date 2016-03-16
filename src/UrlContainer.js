@@ -2,7 +2,7 @@ import React from 'react';
 import {actions, store, href, isActive} from 'component-router';
 
 
-const UrlContainer = React.createClass({
+export const UrlContainer = React.createClass({
   propTypes: {
     children: React.PropTypes.func.isRequired,
     query: React.PropTypes.object,
@@ -58,6 +58,3 @@ const UrlContainer = React.createClass({
     });
   }
 });
-
-
-export default UrlContainer;
