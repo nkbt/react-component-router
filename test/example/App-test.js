@@ -1,5 +1,5 @@
 import test from 'tape';
-import App from '../../src/example/App';
+import App from '../../src/example/App/index';
 
 
 test('App', t => {
