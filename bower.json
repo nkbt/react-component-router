@@ -1,11 +1,16 @@
 {
   "name": "react-component-router",
-  "version": "1.0.0",
+  "version": "0.0.0",
   "description": "React component",
-  "main": "react-component-router.js",
+  "main": [
+    "build/react-component-router.js",
+    "build/react-component-router.js.map",
+    "build/react-component-router.min.js",
+    "build/react-component-router.min.js.map"
+  ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/bower-registry/react-component-router.git"
+    "url": "https://github.com/nkbt/react-component-router.git"
   },
   "keywords": [
     "component",
@@ -18,7 +23,7 @@
   "license": "MIT",
   "homepage": "https://github.com/in-flux/react-component-router",
   "dependencies": {
-    "react": "^0.13 || ^0.14"
+    "react": "^0.14"
   },
   "ignore": [
     "**/.*",

@@ -1,12 +1,13 @@
 import React from 'react';
-import ReactComponentRouter from '..';
+import Component from '../index';
+import css from './App.css';
 
 
 const App = React.createClass({
   render() {
     return (
-      <div>
-        <ReactComponentRouter />
+      <div className={css.app}>
+        <Component />
       </div>
     );
   }
