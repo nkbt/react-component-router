@@ -2,25 +2,20 @@ import React from 'react';
 import {locationHistory as location, createStore} from 'component-router';
 import {Url, RouteContainer, componentRouterHandler, pathnameRouterHandler, Provider} from '../..';
 import css from './App.css';
+import {name} from '../../../package.json';
 
 
-const ComponentHeader = React.createClass({
+const Header = React.createClass({
   render() {
     return (
       <header className={css.header}>
         <nav className={css.nav}>
           <ul>
             <li>
-              <Url query={{page: 'quickstart'}} className={css.tab}>Quickstart</Url>
+              <Url href="/foo" className={css.tab}>/foo</Url>
             </li>
             <li>
-              <Url query={{page: 'foobar'}} className={css.tab}>FooBar</Url>
-            </li>
-            <li className={css.github}>
-              <a
-                href="https://github.com/in-flux/component-router"
-                target="_blank"
-                className={css.tab}>GitHub</a>
+              <Url href="/bar" className={css.tab}>/bar</Url>
             </li>
           </ul>
         </nav>
@@ -30,21 +25,27 @@ const ComponentHeader = React.createClass({
 });
 
 
-const PathnameHeader = React.createClass({
+const Component = React.createClass({
+  propTypes: {
+    params: React.PropTypes.object
+  },
+
+
   render() {
+    const {params} = this.props;
+    console.log('index.js:36    params', params);
+
     return (
-      <header className={css.header}>
-        <nav className={css.nav}>
-          <ul>
-            <li>
-              <Url href="/quickstart" className={css.tab}>Quickstart</Url>
-            </li>
-            <li>
-              <Url href="/foobar" className={css.tab}>FooBar</Url>
-            </li>
-          </ul>
-        </nav>
-      </header>
+      <div className={css.content}>
+        <section>
+          <Url query={{component: 'bla'}} className={css.link}>component: bla</Url>
+          <Url query={{component: 'baz'}} className={css.link}>component: baz</Url>
+        </section>
+        <section>
+          Params:
+          <pre>{JSON.stringify(params, null, 2)}</pre>
+        </section>
+      </div>
     );
   }
 });
@@ -54,20 +55,20 @@ const NotFound = () => <h1>Not Found.</h1>;
 
 
 const ComponentRouteHandler = componentRouterHandler({
-  namespace: 'page',
-  defaultValue: 'quickstart',
+  namespace: 'component',
+  defaultValue: 'bla',
   notFound: NotFound
 })({
-  quickstart: () => <p>Quickstart</p>,
-  foobar: () => <p>FooBar</p>
+  bla: Component,
+  baz: Component
 });
 
 
 const PathnameRouteHandler = pathnameRouterHandler({
   notFound: NotFound
 })({
-  '/quickstart': () => <p>Quickstart</p>,
-  '/foobar': () => <p>FooBar</p>
+  '/foo': ComponentRouteHandler,
+  '/bar': () => <div className={css.content}>/bar</div>
 });
 
 
@@ -91,16 +92,17 @@ const App = React.createClass({
     return (
       <Provider store={this.store}>
         <div className={css.app}>
+          <header>
+            <h1>{name}</h1>
+          </header>
           <RouteContainer>
-            {({query, currentRoute: {route, params}}) => (
+            {({pathname, query, currentRoute: {route, params}}) => (
               <div>
-                <h1>ComponentRouteHandler</h1>
-                <ComponentHeader />
-                <ComponentRouteHandler params={query} />
-
-                <h1>PathnameRouteHandler</h1>
-                <PathnameHeader />
-                <PathnameRouteHandler route={route} params={params} />
+                <Header />
+                <PathnameRouteHandler
+                  pathname={pathname}
+                  route={route}
+                  params={{...params, ...query}} />
               </div>
             )}
           </RouteContainer>

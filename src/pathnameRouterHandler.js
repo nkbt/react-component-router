@@ -36,6 +36,6 @@ export const pathnameRouterHandler = ({notFound}) =>
           return notFound ? React.createElement(notFound) : null;
         }
 
-        return React.createElement(handlers[currentValue], {...params, ...props});
+        return React.createElement(handlers[currentValue], {route, params, ...props});
       }
     });
