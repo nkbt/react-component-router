@@ -86,6 +86,7 @@ const App = React.createClass({
     this.unsubscribe();
   },
 
+
   render() {
     return (
       <Provider store={this.store}>
@@ -103,8 +104,6 @@ const App = React.createClass({
               </div>
             )}
           </RouteContainer>
-
-
         </div>
       </Provider>
     );
