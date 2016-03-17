@@ -1,6 +1,6 @@
 import React from 'react';
-import {locationHistory as location} from 'component-router';
-import {Url, RouteContainer, componentRouterHandler, pathnameRouterHandler} from '../..';
+import {locationHistory as location, createStore} from 'component-router';
+import {Url, RouteContainer, componentRouterHandler, pathnameRouterHandler, Provider} from '../..';
 import css from './App.css';
 
 
@@ -72,8 +72,13 @@ const PathnameRouteHandler = pathnameRouterHandler({
 
 
 const App = React.createClass({
+  componentWillMount() {
+    this.store = createStore();
+  },
+
+
   componentDidMount() {
-    this.unsubscribe = location();
+    this.unsubscribe = location({store: this.store});
   },
 
 
@@ -83,23 +88,25 @@ const App = React.createClass({
 
   render() {
     return (
-      <div className={css.app}>
-        <RouteContainer>
-          {({query, currentRoute: {route, params}}) => (
-            <div>
-              <h1>ComponentRouteHandler</h1>
-              <ComponentHeader />
-              <ComponentRouteHandler params={query} />
+      <Provider store={this.store}>
+        <div className={css.app}>
+          <RouteContainer>
+            {({query, currentRoute: {route, params}}) => (
+              <div>
+                <h1>ComponentRouteHandler</h1>
+                <ComponentHeader />
+                <ComponentRouteHandler params={query} />
 
-              <h1>PathnameRouteHandler</h1>
-              <PathnameHeader />
-              <PathnameRouteHandler route={route} params={params} />
-            </div>
-          )}
-        </RouteContainer>
+                <h1>PathnameRouteHandler</h1>
+                <PathnameHeader />
+                <PathnameRouteHandler route={route} params={params} />
+              </div>
+            )}
+          </RouteContainer>
 
 
-      </div>
+        </div>
+      </Provider>
     );
   }
 });

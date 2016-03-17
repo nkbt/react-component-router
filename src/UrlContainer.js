@@ -1,5 +1,5 @@
 import React from 'react';
-import {actions, store, href, isActive} from 'component-router';
+import {actions, href, isActive} from 'component-router';
 
 
 export const UrlContainer = React.createClass({
@@ -10,13 +10,18 @@ export const UrlContainer = React.createClass({
   },
 
 
+  contextTypes: {
+    store: React.PropTypes.object
+  },
+
+
   getInitialState() {
-    return store.getState();
+    return this.context.store.getState();
   },
 
 
   componentDidMount() {
-    this.unsubscribe = store.subscribe(this.onChange);
+    this.unsubscribe = this.context.store.subscribe(this.onChange);
   },
 
 
@@ -37,24 +42,25 @@ export const UrlContainer = React.createClass({
       // React only on normal left-button clicks
       if (this.isLMB(event)) {
         event.preventDefault();
-        store.dispatch(actions.navigateTo({query, pathname}));
+        this.context.store.dispatch(actions.navigateTo({query, pathname}));
       }
     };
   },
 
 
   onChange() {
-    this.replaceState(store.getState());
+    this.replaceState(this.context.store.getState());
   },
 
 
   render() {
     const {children: render, query, pathname} = this.props;
+    const {store} = this.context;
 
     return render({
-      href: href({query, pathname}),
+      href: href(store.getState(), {query, pathname}),
       onClick: this.onClick({query, pathname}),
-      'data-active': isActive({query, pathname})
+      'data-active': isActive(store.getState(), {query, pathname})
     });
   }
 });

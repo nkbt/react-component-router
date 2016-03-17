@@ -1,5 +1,5 @@
 import React from 'react';
-import {actions, store} from 'component-router';
+import {actions} from 'component-router';
 
 
 export const pathnameRouterHandler = ({notFound}) =>
@@ -11,15 +11,20 @@ export const pathnameRouterHandler = ({notFound}) =>
       },
 
 
+      contextTypes: {
+        store: React.PropTypes.object
+      },
+
+
       componentDidMount() {
         Object.keys(handlers).forEach(route =>
-          store.dispatch(actions.addRoute(route)));
+          this.context.store.dispatch(actions.addRoute(route)));
       },
 
 
       componentWillUnmount() {
         Object.keys(handlers).forEach(route =>
-          store.dispatch(actions.removeRoute(route)));
+          this.context.store.dispatch(actions.removeRoute(route)));
       },
 
 

@@ -3,3 +3,4 @@ export {componentRouterHandler} from './componentRouterHandler';
 export {RouteContainer} from './RouteContainer';
 export {UrlContainer} from './UrlContainer';
 export {Url} from './Url';
+export {Provider} from './Provider';

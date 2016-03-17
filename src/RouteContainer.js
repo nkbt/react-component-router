@@ -1,5 +1,4 @@
 import React from 'react';
-import {store} from 'component-router';
 
 
 export const RouteContainer = React.createClass({
@@ -8,13 +7,18 @@ export const RouteContainer = React.createClass({
   },
 
 
+  contextTypes: {
+    store: React.PropTypes.object
+  },
+
+
   getInitialState() {
-    return store.getState();
+    return this.context.store.getState();
   },
 
 
   componentDidMount() {
-    this.unsubscribe = store.subscribe(this.onChange);
+    this.unsubscribe = this.context.store.subscribe(this.onChange);
   },
 
 
@@ -24,7 +28,7 @@ export const RouteContainer = React.createClass({
 
 
   onChange() {
-    this.replaceState(store.getState());
+    this.replaceState(this.context.store.getState());
   },
 
 

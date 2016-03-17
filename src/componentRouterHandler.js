@@ -1,5 +1,5 @@
 import React from 'react';
-import {actions, store} from 'component-router';
+import {actions} from 'component-router';
 
 
 export const componentRouterHandler = ({namespace, notFound, defaultValue}) =>
@@ -10,16 +10,21 @@ export const componentRouterHandler = ({namespace, notFound, defaultValue}) =>
       },
 
 
+      contextTypes: {
+        store: React.PropTypes.object
+      },
+
+
       componentDidMount() {
         if (defaultValue) {
-          store.dispatch(actions.addDefaultParam(namespace, defaultValue));
+          this.context.store.dispatch(actions.addDefaultParam(namespace, defaultValue));
         }
       },
 
 
       componentWillUnmount() {
         if (defaultValue) {
-          store.dispatch(actions.removeParam(namespace));
+          this.context.store.dispatch(actions.removeParam(namespace));
         }
       },
 
