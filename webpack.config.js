@@ -1,5 +1,3 @@
-/* eslint no-process-env:0 */
-
 'use strict';
 
 
@@ -14,11 +12,7 @@ const loaders = [
     loader: 'style!css?sourceMap&modules&localIdentName=[path][name]---[local]',
     include: [path.resolve('src/example')]
   },
-  {
-    test: /\.json$/,
-    loader: 'json',
-    include: [path.resolve('src/example')]
-  },
+  {test: /\.json$/, loader: 'json'},
   {
     test: /\.js$/,
     loader: 'babel',
