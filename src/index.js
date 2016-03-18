@@ -1,6 +1,6 @@
-'use strict';
-
-// Babel6 does not hack the default behaviour of ES Modules anymore, so we should export
-const ReactComponentRouter = require('./ReactComponentRouter').default;
-
-module.exports = ReactComponentRouter;
+export {pathnameRouterHandler} from './pathnameRouterHandler';
+export {componentRouterHandler} from './componentRouterHandler';
+export {RouteContainer} from './RouteContainer';
+export {UrlContainer} from './UrlContainer';
+export {Url} from './Url';
+export {Provider} from './Provider';
