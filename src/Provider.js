@@ -4,17 +4,31 @@ import React from 'react';
 export const Provider = React.createClass({
   propTypes: {
     store: React.PropTypes.object.isRequired,
+    namespace: React.PropTypes.string,
     children: React.PropTypes.element.isRequired
   },
 
 
   childContextTypes: {
-    store: React.PropTypes.object
+    getComponentRouterStore: React.PropTypes.func,
+    getComponentRouterState: React.PropTypes.func
+  },
+
+
+  getDefaultProps() {
+    return {
+      namespace: 'componentRouter'
+    };
   },
 
 
   getChildContext() {
-    return {store: this.props.store};
+    const {store, namespace} = this.props;
+
+    return {
+      getComponentRouterStore: () => store,
+      getComponentRouterState: () => store.getState()[namespace]
+    };
   },
 
 

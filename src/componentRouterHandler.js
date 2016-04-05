@@ -11,20 +11,22 @@ export const componentRouterHandler = ({namespace, notFound, defaultValue}) =>
 
 
       contextTypes: {
-        store: React.PropTypes.object
+        getComponentRouterStore: React.PropTypes.func
       },
 
 
       componentDidMount() {
         if (defaultValue) {
-          this.context.store.dispatch(actions.addDefaultParam(namespace, defaultValue));
+          this.context.getComponentRouterStore()
+            .dispatch(actions.addDefaultParam(namespace, defaultValue));
         }
       },
 
 
       componentWillUnmount() {
         if (defaultValue) {
-          this.context.store.dispatch(actions.removeParam(namespace));
+          this.context.getComponentRouterStore()
+            .dispatch(actions.removeParam(namespace));
         }
       },
 

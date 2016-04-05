@@ -12,19 +12,19 @@ export const pathnameRouterHandler = ({notFound}) =>
 
 
       contextTypes: {
-        store: React.PropTypes.object
+        getComponentRouterStore: React.PropTypes.func
       },
 
 
       componentDidMount() {
         Object.keys(handlers).forEach(route =>
-          this.context.store.dispatch(actions.addRoute(route)));
+          this.context.getComponentRouterStore().dispatch(actions.addRoute(route)));
       },
 
 
       componentWillUnmount() {
         Object.keys(handlers).forEach(route =>
-          this.context.store.dispatch(actions.removeRoute(route)));
+          this.context.getComponentRouterStore().dispatch(actions.removeRoute(route)));
       },
 
 

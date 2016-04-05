@@ -1,57 +1,16 @@
 import React from 'react';
-import {locationHistory as location, createStore} from 'component-router';
+import {locationHistory as location} from 'component-router';
 import {Url, RouteContainer, componentRouterHandler, pathnameRouterHandler, Provider} from '../..';
-import css from './App.css';
+import {createStore} from './store';
 import {name} from '../../../package.json';
+import css from './App.css';
 
 
-const Header = React.createClass({
-  render() {
-    return (
-      <header className={css.header}>
-        <nav className={css.nav}>
-          <ul>
-            <li>
-              <Url href="/foo" className={css.tab}>/foo</Url>
-            </li>
-            <li>
-              <Url href="/bar" className={css.tab}>/bar</Url>
-            </li>
-          </ul>
-        </nav>
-      </header>
-    );
-  }
-});
+const store = createStore();
+location({store, getComponentRouterState: state => state.componentRouter});
 
 
-const Component = React.createClass({
-  propTypes: {
-    params: React.PropTypes.object
-  },
-
-
-  render() {
-    const {params} = this.props;
-    console.log('index.js:36    params', params);
-
-    return (
-      <div className={css.content}>
-        <section>
-          <Url query={{component: 'bla'}} className={css.link}>component: bla</Url>
-          <Url query={{component: 'baz'}} className={css.link}>component: baz</Url>
-        </section>
-        <section>
-          Params:
-          <pre>{JSON.stringify(params, null, 2)}</pre>
-        </section>
-      </div>
-    );
-  }
-});
-
-
-const NotFound = () => <h1>Not Found.</h1>;
+const NotFound = () => <h2>Not Found.</h2>;
 
 
 const ComponentRouteHandler = componentRouterHandler({
@@ -59,50 +18,85 @@ const ComponentRouteHandler = componentRouterHandler({
   defaultValue: 'bla',
   notFound: NotFound
 })({
-  bla: Component,
-  baz: Component
+  bla: () => <h3>Bla</h3>,
+  baz: () => <h3>Baz</h3>
 });
+
+
+const Bar = () => (
+  <div className={css.content}>
+    <h2>Bar</h2>
+  </div>
+);
+
+
+const Foo = ({...props}) => (
+  <div className={css.content}>
+    <h2>Foo</h2>
+    <section>
+      <ComponenentLinks />
+    </section>
+    <section className={css.content}>
+      <ComponentRouteHandler {...props} />
+    </section>
+  </div>
+);
 
 
 const PathnameRouteHandler = pathnameRouterHandler({
   notFound: NotFound
 })({
-  '/foo': ComponentRouteHandler,
-  '/bar': () => <div className={css.content}>/bar</div>
+  '/foo': Foo,
+  '/bar': Bar
 });
 
 
+const GlobalLinks = () => (
+  <ul>
+    <li>
+      <Url href="/foo" className={css.tab}>/foo</Url>
+    </li>
+    <li>
+      <Url href="/bar" className={css.tab}>/bar</Url>
+    </li>
+  </ul>
+);
+
+
+const ComponenentLinks = () => (
+  <span>
+    <Url query={{component: 'bla'}} className={css.link}>component: bla</Url>
+    <Url query={{component: 'baz'}} className={css.link}>component: baz</Url>
+  </span>
+);
+
+
+const Header = () => (
+  <header className={css.header}>
+    <nav className={css.nav}>
+      <GlobalLinks />
+    </nav>
+  </header>
+);
+
+
 const App = React.createClass({
-  componentWillMount() {
-    this.store = createStore();
-  },
-
-
-  componentDidMount() {
-    this.unsubscribe = location({store: this.store});
-  },
-
-
-  componentWillUnmount() {
-    this.unsubscribe();
-  },
-
-
   render() {
     return (
-      <Provider store={this.store}>
+      <Provider store={store} namespace="componentRouter">
         <div className={css.app}>
-          <header>
-            <h1>{name}</h1>
-          </header>
           <RouteContainer>
-            {({pathname, query, currentRoute: {route, params}}) => (
+            {routingState => (
               <div>
                 <Header />
                 <PathnameRouteHandler
-                  pathname={pathname}
-                  route={route}
-                  params={{...params, ...query}} />
+                  pathname={routingState.pathname}
+                  route={routingState.currentRoute.route}
+                  params={{...routingState.currentRoute.params, ...routingState.query}} />
+                <section className={css.content}>
+                  Routing state:
+                  <pre>{JSON.stringify(routingState, null, 2)}</pre>
+                </section>
               </div>
             )}
           </RouteContainer>

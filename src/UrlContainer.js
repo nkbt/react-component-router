@@ -11,17 +11,18 @@ export const UrlContainer = React.createClass({
 
 
   contextTypes: {
-    store: React.PropTypes.object
+    getComponentRouterStore: React.PropTypes.func,
+    getComponentRouterState: React.PropTypes.func
   },
 
 
   getInitialState() {
-    return this.context.store.getState();
+    return this.context.getComponentRouterState();
   },
 
 
   componentDidMount() {
-    this.unsubscribe = this.context.store.subscribe(this.onChange);
+    this.unsubscribe = this.context.getComponentRouterStore().subscribe(this.onChange);
   },
 
 
@@ -42,25 +43,24 @@ export const UrlContainer = React.createClass({
       // React only on normal left-button clicks
       if (this.isLMB(event)) {
         event.preventDefault();
-        this.context.store.dispatch(actions.navigateTo({query, pathname}));
+        this.context.getComponentRouterStore().dispatch(actions.navigateTo({query, pathname}));
       }
     };
   },
 
 
   onChange() {
-    this.replaceState(this.context.store.getState());
+    this.replaceState(this.context.getComponentRouterState());
   },
 
 
   render() {
     const {children: render, query, pathname} = this.props;
-    const {store} = this.context;
 
     return render({
-      href: href(store.getState(), {query, pathname}),
+      href: href(this.state, {query, pathname}),
       onClick: this.onClick({query, pathname}),
-      'data-active': isActive(store.getState(), {query, pathname})
+      'data-active': isActive(this.state, {query, pathname})
     });
   }
 });
