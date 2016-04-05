@@ -7,7 +7,7 @@ import css from './App.css';
 
 
 const store = createStore();
-location({store, getComponentRouterState: state => state.componentRouter});
+location({store, namespace: 'componentRouter'});
 
 
 const NotFound = () => <h2>Not Found.</h2>;
