@@ -85,6 +85,7 @@ const App = React.createClass({
     return (
       <Provider store={store} namespace="componentRouter">
         <div className={css.app}>
+          <h1>{name}</h1>
           <RouteContainer>
             {routingState => (
               <div>
