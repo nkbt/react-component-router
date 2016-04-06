@@ -8,17 +8,18 @@ export const RouteContainer = React.createClass({
 
 
   contextTypes: {
-    store: React.PropTypes.object
+    getComponentRouterStore: React.PropTypes.func,
+    getComponentRouterState: React.PropTypes.func
   },
 
 
   getInitialState() {
-    return this.context.store.getState();
+    return this.context.getComponentRouterState();
   },
 
 
   componentDidMount() {
-    this.unsubscribe = this.context.store.subscribe(this.onChange);
+    this.unsubscribe = this.context.getComponentRouterStore().subscribe(this.onChange);
   },
 
 
@@ -28,7 +29,7 @@ export const RouteContainer = React.createClass({
 
 
   onChange() {
-    this.replaceState(this.context.store.getState());
+    this.replaceState(this.context.getComponentRouterState());
   },
 
 

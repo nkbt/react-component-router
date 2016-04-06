@@ -54,7 +54,7 @@
     "babel-preset-react": "6.5.0",
     "babel-preset-react-hmre": "1.1.1",
     "codecov.io": "0.1.6",
-    "component-router": "3.0.0-alpha.8",
+    "component-router": "3.0.0-alpha.11",
     "cross-env": "1.0.7",
     "css-loader": "0.23.1",
     "eslint": "2.4.0",
