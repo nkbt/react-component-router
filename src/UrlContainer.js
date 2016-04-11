@@ -1,6 +1,6 @@
 import React from 'react';
 import {actions, href, isActive} from 'component-router';
-import {RouteContainer} from './';
+import {RouteContainer} from './RouteContainer';
 
 
 export const UrlContainer = React.createClass({
