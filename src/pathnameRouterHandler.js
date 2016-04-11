@@ -29,10 +29,10 @@ export const pathnameRouterHandler = ({notFound}) =>
 
 
       render() {
-        const {route, params, ...props} = this.props;
+        const {route = null, params, ...props} = this.props;
         const currentValue = route;
 
-        if (currentValue === undefined || !handlers.hasOwnProperty(currentValue)) {
+        if (currentValue === null || !handlers.hasOwnProperty(currentValue)) {
           return notFound ? React.createElement(notFound) : null;
         }
 

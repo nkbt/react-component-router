@@ -33,12 +33,11 @@ export const componentRouterHandler = ({namespace, notFound, defaultValue}) =>
 
       render() {
         const {params, ...props} = this.props;
-        const currentValue = params[namespace];
 
-        if (currentValue === undefined || !handlers.hasOwnProperty(currentValue)) {
+        if (!params.hasOwnProperty(namespace) || !handlers.hasOwnProperty(params[namespace])) {
           return notFound ? React.createElement(notFound) : null;
         }
 
-        return React.createElement(handlers[currentValue], {params, ...props});
+        return React.createElement(handlers[params[namespace]], {params, ...props});
       }
     });

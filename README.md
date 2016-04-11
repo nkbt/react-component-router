@@ -15,10 +15,10 @@ Official ComponentRouter bindings for React.
 ### NPM
 
 ```sh
-npm install --save react react-component-router
+npm install --save react component-router@alpha react-component-router
 ```
 
-Don't forget to manually install peer dependencies (`react`) if you use npm@3.
+Don't forget to manually install peer dependencies (`react`, `component-router@alpha`) if you use npm@3.
 
 
 ### Bower:
