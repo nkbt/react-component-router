@@ -1,5 +1,6 @@
 import React from 'react';
 import {actions, href, isActive} from 'component-router';
+import {RouteContainer} from './';
 
 
 export const UrlContainer = React.createClass({
@@ -11,23 +12,7 @@ export const UrlContainer = React.createClass({
 
 
   contextTypes: {
-    getComponentRouterStore: React.PropTypes.func,
-    getComponentRouterState: React.PropTypes.func
-  },
-
-
-  getInitialState() {
-    return this.context.getComponentRouterState();
-  },
-
-
-  componentDidMount() {
-    this.unsubscribe = this.context.getComponentRouterStore().subscribe(this.onChange);
-  },
-
-
-  componentWillUnmount() {
-    this.unsubscribe();
+    getComponentRouterStore: React.PropTypes.func
   },
 
 
@@ -43,24 +28,24 @@ export const UrlContainer = React.createClass({
       // React only on normal left-button clicks
       if (this.isLMB(event)) {
         event.preventDefault();
-        this.context.getComponentRouterStore().dispatch(actions.navigateTo({query, pathname}));
+        this.context.getComponentRouterStore()
+          .dispatch(actions.navigateTo({query, pathname}));
       }
     };
-  },
-
-
-  onChange() {
-    this.replaceState(this.context.getComponentRouterState());
   },
 
 
   render() {
     const {children: render, query, pathname} = this.props;
 
-    return render({
-      href: href(this.state, {query, pathname}),
-      onClick: this.onClick({query, pathname}),
-      'data-active': isActive(this.state, {query, pathname})
-    });
+    return (
+      <RouteContainer>
+        {state => render({
+          href: href(state, {query, pathname}),
+          onClick: this.onClick({query, pathname}),
+          'data-active': isActive(state, {query, pathname})
+        })}
+      </RouteContainer>
+    );
   }
 });

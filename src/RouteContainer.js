@@ -18,18 +18,31 @@ export const RouteContainer = React.createClass({
   },
 
 
+  componentWillMount() {
+    this.unsubscribe = null;
+  },
+
+
   componentDidMount() {
-    this.unsubscribe = this.context.getComponentRouterStore().subscribe(this.onChange);
+    if (!this.unsubscribe) {
+      this.unsubscribe = this.context.getComponentRouterStore()
+        .subscribe(this.onChange);
+    }
   },
 
 
   componentWillUnmount() {
-    this.unsubscribe();
+    if (this.unsubscribe) {
+      this.unsubscribe();
+      this.unsubscribe = null;
+    }
   },
 
 
   onChange() {
-    this.replaceState(this.context.getComponentRouterState());
+    if (this.unsubscribe) {
+      this.replaceState(this.context.getComponentRouterState());
+    }
   },
 
 
