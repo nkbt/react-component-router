@@ -23,7 +23,7 @@ Don't forget to manually install peer dependencies (`react`, `component-router@a
 
 ### Bower:
 ```sh
-bower install --save https://npmcdn.com/react-component-router/bower.zip
+bower install --save https://unpkg.com/react-component-router/bower.zip
 ```
 
 or in `bower.json`
@@ -31,7 +31,7 @@ or in `bower.json`
 ```json
 {
   "dependencies": {
-    "react-component-router": "https://npmcdn.com/react-component-router/bower.zip"
+    "react-component-router": "https://unpkg.com/react-component-router/bower.zip"
   }
 }
 ```
@@ -45,8 +45,8 @@ then include as
 
 ### 1998 Script Tag:
 ```html
-<script src="https://npmcdn.com/react/dist/react.js"></script>
-<script src="https://npmcdn.com/react-component-router/build/react-component-router.js"></script>
+<script src="https://unpkg.com/react/dist/react.js"></script>
+<script src="https://unpkg.com/react-component-router/build/react-component-router.js"></script>
 (Module exposed as `ReactComponentRouter`)
 ```
 
