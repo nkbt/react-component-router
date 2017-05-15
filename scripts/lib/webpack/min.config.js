@@ -1,6 +1,5 @@
 'use strict';
 
-const webpack = require('webpack');
 const {
   pathTo,
   PACKAGE_NAME,
