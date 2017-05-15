@@ -1,25 +1,24 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 
-export const Provider = React.createClass({
-  propTypes: {
-    store: React.PropTypes.object.isRequired,
-    namespace: React.PropTypes.string,
-    children: React.PropTypes.element.isRequired
-  },
+export class Provider extends React.PureComponent {
+  static childContextTypes = {
+    getComponentRouterStore: PropTypes.func,
+    getComponentRouterState: PropTypes.func
+  };
 
 
-  childContextTypes: {
-    getComponentRouterStore: React.PropTypes.func,
-    getComponentRouterState: React.PropTypes.func
-  },
+  static defaultProps = {
+    namespace: 'componentRouter'
+  };
 
 
-  getDefaultProps() {
-    return {
-      namespace: 'componentRouter'
-    };
-  },
+  static propTypes = {
+    store: PropTypes.object.isRequired,
+    namespace: PropTypes.string,
+    children: PropTypes.element.isRequired
+  };
 
 
   getChildContext() {
@@ -29,10 +28,10 @@ export const Provider = React.createClass({
       getComponentRouterStore: () => store,
       getComponentRouterState: () => store.getState()[namespace]
     };
-  },
+  }
 
 
   render() {
     return React.Children.only(this.props.children);
   }
-});
+}

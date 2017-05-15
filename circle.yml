@@ -1,13 +1,21 @@
 machine:
   node:
-    version: v5.7.1
+    version: 7
+  environment:
+    NODE_ENV: development
+
+dependencies:
+  pre:
+    - wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+    - sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
+    - sudo apt-get update
+    - sudo apt-get --only-upgrade install google-chrome-stable
+    - npm set progress=false
+  override:
+    - npm install
 
 test:
   override:
-    - $(npm bin)/eslint --debug . --format tap | $(npm bin)/tap-xunit > ${CIRCLE_TEST_REPORTS}/lint.xml && test ${PIPESTATUS[0]} -eq 0
-    - $(npm bin)/babel-node test | $(npm bin)/tap-xunit > ${CIRCLE_TEST_REPORTS}/test.xml && test ${PIPESTATUS[0]} -eq 0
-    - $(npm bin)/babel-node $(npm bin)/isparta cover --report text --report lcov --verbose --dir ${CIRCLE_ARTIFACTS}/coverage  --include '**/!(*-test).js' test/index.js
-    - REPORT_DIR=${CIRCLE_TEST_REPORTS} LOG_DIR=${CIRCLE_ARTIFACTS} npm run test:e2e -s
-
-  post:
-    - cat ${CIRCLE_ARTIFACTS}/coverage/lcov.info | $(npm bin)/codecov
+    - npm start -s lint
+    - npm start -s test
+    - npm start -s e2e

@@ -1,41 +1,46 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {actions} from 'component-router';
 
 
 export const pathnameRouterHandler = ({notFound}) =>
-  handlers =>
-    React.createClass({
-      propTypes: {
-        route: React.PropTypes.string.isRequired,
-        params: React.PropTypes.object.isRequired
-      },
+  handlers => class extends React.PureComponent {
+    static propTypes = {
+      route: PropTypes.string,
+      params: PropTypes.object.isRequired
+    };
 
 
-      contextTypes: {
-        getComponentRouterStore: React.PropTypes.func
-      },
+    static defaultProps = {
+      route: null
+    };
 
 
-      componentDidMount() {
-        Object.keys(handlers).forEach(route =>
-          this.context.getComponentRouterStore().dispatch(actions.addRoute(route)));
-      },
+    static contextTypes = {
+      getComponentRouterStore: PropTypes.func
+    };
 
 
-      componentWillUnmount() {
-        Object.keys(handlers).forEach(route =>
-          this.context.getComponentRouterStore().dispatch(actions.removeRoute(route)));
-      },
+    componentDidMount() {
+      Object.keys(handlers).forEach(route =>
+        this.context.getComponentRouterStore().dispatch(actions.addRoute(route)));
+    }
 
 
-      render() {
-        const {route = null, params, ...props} = this.props;
-        const currentValue = route;
+    componentWillUnmount() {
+      Object.keys(handlers).forEach(route =>
+        this.context.getComponentRouterStore().dispatch(actions.removeRoute(route)));
+    }
 
-        if (currentValue === null || !handlers.hasOwnProperty(currentValue)) {
-          return notFound ? React.createElement(notFound) : null;
-        }
 
-        return React.createElement(handlers[currentValue], {route, params, ...props});
+    render() {
+      const {route, params, ...props} = this.props;
+      const currentValue = route;
+
+      if (currentValue === null || !(currentValue in handlers)) {
+        return notFound ? React.createElement(notFound) : null;
       }
-    });
+
+      return React.createElement(handlers[currentValue], {route, params, ...props});
+    }
+  };

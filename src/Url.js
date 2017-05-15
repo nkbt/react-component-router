@@ -1,22 +1,49 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {UrlContainer} from './UrlContainer';
 
 
-export const Url = React.createClass({
-  propTypes: {
-    children: React.PropTypes.node,
-    href: React.PropTypes.string,
-    query: React.PropTypes.object
-  },
+class A extends React.PureComponent {
+  static propTypes = {
+    children: PropTypes.node
+  };
+
+
+  static defaultProps = {
+    children: undefined
+  };
 
 
   render() {
-    const {query, href, children, ...props} = this.props;
+    const {children, ...props} = this.props;
+
+    return (
+      <a {...props}>{children}</a>
+    );
+  }
+}
+
+
+export class Url extends React.PureComponent {
+  static propTypes = {
+    href: PropTypes.string,
+    query: PropTypes.object
+  };
+
+
+  static defaultProps = {
+    href: undefined,
+    query: undefined
+  };
+
+
+  render() {
+    const {query, href, ...props} = this.props;
 
     return (
       <UrlContainer {...{query, pathname: href}}>
-        {urlProps => <a {...urlProps} {...props}>{children}</a>}
+        {urlProps => <A {...urlProps} {...props} />}
       </UrlContainer>
     );
   }
-});
+}
