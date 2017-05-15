@@ -7,7 +7,6 @@ const HtmlWebpackIncludeAssetsPlugin = require(`html-webpack-include-assets-plug
 const path = require(`path`);
 const {NODE_ENV = `development`} = process.env;
 
-
 const pathTo = p => path.join(process.cwd(), p);
 exports.pathTo = pathTo;
 
@@ -38,6 +37,7 @@ exports.loaders = {
     loader: `babel-loader`,
     include: [pathTo(`src`), pathTo(`example`)],
     options: {
+      babelrc: false,
       presets: [
         [`es2015`, {modules: false}],
         `react`
@@ -70,7 +70,8 @@ exports.plugins = {
   }),
   loaderOptions: new webpack.LoaderOptionsPlugin({
     minimize: true
-  })
+  }),
+  proptypes: new webpack.NormalModuleReplacementPlugin(/^prop-types$/, 'node-noop')
 };
 
 

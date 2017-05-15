@@ -1,6 +1,6 @@
 'use strict';
 
-
+const webpack = require('webpack');
 const {
   pathTo,
   PACKAGE_NAME,
@@ -23,6 +23,7 @@ module.exports = {
     libraryTarget: `umd`
   },
   plugins: [
+    plugins.proptypes,
     plugins.define,
     plugins.uglify,
     plugins.loaderOptions
