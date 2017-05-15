@@ -41,6 +41,9 @@
     "url": "https://github.com/in-flux/react-component-router/issues"
   },
   "homepage": "https://github.com/in-flux/react-component-router",
+  "dependencies": {
+    "prop-types": "15"
+  },
   "peerDependencies": {
     "component-router": "3",
     "react": "^15.3.0"
@@ -70,7 +73,6 @@
     "html-webpack-include-assets-plugin": "0.0.5",
     "html-webpack-plugin": "2.28.0",
     "nightwatch-autorun": "3.1.0",
-    "prop-types": "15.5.10",
     "react": "15.5.4",
     "react-dom": "15.5.4",
     "redux": "3.6.0",
