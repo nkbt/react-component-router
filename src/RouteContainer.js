@@ -17,9 +17,13 @@ export class RouteContainer extends React.Component {
   state = {routerState: this.context.getComponentRouterState()};
 
 
-  componentWillMount() {
+  componentDidMount() {
     this.unsubscribe = this.context.getComponentRouterStore()
       .subscribe(this.onChange);
+
+    // Must update the state since other components could update routes
+    // eslint-disable-next-line react/no-did-mount-set-state
+    this.setState({routerState: this.context.getComponentRouterState()});
   }
 
 

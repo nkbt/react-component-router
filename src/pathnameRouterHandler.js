@@ -4,7 +4,7 @@ import {actions} from 'component-router';
 
 
 export const pathnameRouterHandler = ({notFound}) =>
-  handlers => class extends React.Component {
+  handlers => class extends React.PureComponent {
     static propTypes = {
       route: PropTypes.string,
       params: PropTypes.object.isRequired

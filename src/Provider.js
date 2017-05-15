@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 
-export class Provider extends React.Component {
+export class Provider extends React.PureComponent {
   static childContextTypes = {
     getComponentRouterStore: PropTypes.func,
     getComponentRouterState: PropTypes.func

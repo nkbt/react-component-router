@@ -4,7 +4,7 @@ import {actions, href, isActive} from 'component-router';
 import {RouteContainer} from './RouteContainer';
 
 
-export class UrlContainer extends React.Component {
+export class UrlContainer extends React.PureComponent {
   static contextTypes = {
     getComponentRouterStore: PropTypes.func
   };
