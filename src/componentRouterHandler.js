@@ -34,7 +34,7 @@ export const componentRouterHandler = ({namespace, notFound, defaultValue}) =>
       render() {
         const {params, ...props} = this.props;
 
-        if (!params.hasOwnProperty(namespace) || !handlers.hasOwnProperty(params[namespace])) {
+        if (!(namespace in params) || !(params[namespace] in handlers)) {
           return notFound ? React.createElement(notFound) : null;
         }
 

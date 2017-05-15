@@ -14,20 +14,13 @@ export const RouteContainer = React.createClass({
 
 
   getInitialState() {
-    return this.context.getComponentRouterState();
+    return {routerState: this.context.getComponentRouterState()};
   },
 
 
   componentWillMount() {
-    this.unsubscribe = null;
-  },
-
-
-  componentDidMount() {
-    if (!this.unsubscribe) {
-      this.unsubscribe = this.context.getComponentRouterStore()
-        .subscribe(this.onChange);
-    }
+    this.unsubscribe = this.context.getComponentRouterStore()
+      .subscribe(this.onChange);
   },
 
 
@@ -41,14 +34,15 @@ export const RouteContainer = React.createClass({
 
   onChange() {
     if (this.unsubscribe) {
-      this.replaceState(this.context.getComponentRouterState());
+      this.setState({routerState: this.context.getComponentRouterState()});
     }
   },
 
 
   render() {
     const {children: render} = this.props;
+    const {routerState} = this.state;
 
-    return render(this.state);
+    return render(routerState);
   }
 });

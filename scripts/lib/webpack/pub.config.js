@@ -33,6 +33,7 @@ module.exports = {
       `https://unpkg.com/redux/dist/redux.min.js`,
       `https://unpkg.com/qs/dist/qs.js`,
       `https://unpkg.com/history/umd/history.min.js`,
+      `https://unpkg.com/component-router/build/component-router.min.js`,
       `styles.css`
     ]),
     new ExtractTextPlugin(`styles.css`)

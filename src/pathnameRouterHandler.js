@@ -6,8 +6,15 @@ export const pathnameRouterHandler = ({notFound}) =>
   handlers =>
     React.createClass({
       propTypes: {
-        route: React.PropTypes.string.isRequired,
+        route: React.PropTypes.string,
         params: React.PropTypes.object.isRequired
+      },
+
+
+      getDefaultProps() {
+        return {
+          route: null
+        };
       },
 
 
@@ -29,10 +36,10 @@ export const pathnameRouterHandler = ({notFound}) =>
 
 
       render() {
-        const {route = null, params, ...props} = this.props;
+        const {route, params, ...props} = this.props;
         const currentValue = route;
 
-        if (currentValue === null || !handlers.hasOwnProperty(currentValue)) {
+        if (currentValue === null || !(currentValue in handlers)) {
           return notFound ? React.createElement(notFound) : null;
         }
 
