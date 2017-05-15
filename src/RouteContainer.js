@@ -1,27 +1,26 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 
-export const RouteContainer = React.createClass({
-  propTypes: {
-    children: React.PropTypes.func.isRequired
-  },
+export class RouteContainer extends React.Component {
+  static contextTypes = {
+    getComponentRouterStore: PropTypes.func,
+    getComponentRouterState: PropTypes.func
+  };
 
 
-  contextTypes: {
-    getComponentRouterStore: React.PropTypes.func,
-    getComponentRouterState: React.PropTypes.func
-  },
+  static propTypes = {
+    children: PropTypes.func.isRequired
+  };
 
 
-  getInitialState() {
-    return {routerState: this.context.getComponentRouterState()};
-  },
+  state = {routerState: this.context.getComponentRouterState()};
 
 
   componentWillMount() {
     this.unsubscribe = this.context.getComponentRouterStore()
       .subscribe(this.onChange);
-  },
+  }
 
 
   componentWillUnmount() {
@@ -29,14 +28,14 @@ export const RouteContainer = React.createClass({
       this.unsubscribe();
       this.unsubscribe = null;
     }
-  },
+  }
 
 
-  onChange() {
+  onChange = () => {
     if (this.unsubscribe) {
       this.setState({routerState: this.context.getComponentRouterState()});
     }
-  },
+  };
 
 
   render() {
@@ -45,4 +44,4 @@ export const RouteContainer = React.createClass({
 
     return render(routerState);
   }
-});
+}
