@@ -22,7 +22,7 @@ module.exports = {
     path: pathTo(`pub`)
   },
   plugins: [
-    plugins.proptypes,
+    // plugins.proptypes,
     plugins.define,
     new webpack.DefinePlugin({
       'process.env.HISTORY': JSON.stringify('HASH')
