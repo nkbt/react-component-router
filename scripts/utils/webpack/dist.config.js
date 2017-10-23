@@ -23,7 +23,6 @@ module.exports = {
     libraryTarget: `umd`
   },
   plugins: [
-    // plugins.proptypes,
     plugins.define
   ],
   module: {
