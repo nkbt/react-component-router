@@ -1,6 +1,6 @@
 {
   "name": "react-component-router",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Official ComponentRouter bindings for React",
   "main": "lib/index.js",
   "config": {
