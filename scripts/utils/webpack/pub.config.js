@@ -1,8 +1,8 @@
 'use strict';
 
 
-const webpack = require(`webpack`);
-const ExtractTextPlugin = require(`extract-text-webpack-plugin`);
+const webpack = require('webpack');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const {
   pathTo,
@@ -12,24 +12,27 @@ const {
   stats,
   externals,
   INCLUDE_JS
-} = require(`./common`);
+} = require('./common');
 
 
 module.exports = {
+  mode: 'development',
   devtool: false,
-  entry: pathTo(`example`, `index.js`),
+  entry: pathTo('example', 'index.js'),
   output: {
-    filename: `bundle.js`,
-    path: pathTo(`pub`)
+    filename: 'bundle.js',
+    path: pathTo('pub')
+  },
+  optimization: {
+    minimize: false
   },
   plugins: [
     new webpack.DefinePlugin({
-      'process.env.HISTORY': JSON.stringify('HASH')
+      'process.env.HISTORY': '"HASH"'
     }),
-    plugins.define,
     plugins.html,
-    plugins.include(INCLUDE_JS.concat([`styles.css`])),
-    new ExtractTextPlugin(`styles.css`)
+    plugins.include(INCLUDE_JS.concat(['styles.css'])),
+    new ExtractTextPlugin('styles.css')
   ],
   module: {
     rules: [
@@ -37,8 +40,8 @@ module.exports = {
       {
         test: /\.css$/,
         use: ExtractTextPlugin.extract({
-          fallback: `style-loader`,
-          use: `css-loader`
+          fallback: 'style-loader',
+          use: 'css-loader'
         })
       }
     ]

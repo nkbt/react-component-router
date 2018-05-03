@@ -2,28 +2,29 @@
 
 
 const {
+  mode,
   pathTo,
   plugins,
   loaders,
   resolve,
   stats
-} = require(`./common`);
+} = require('./common');
 
 
 module.exports = {
-  devtool: `#source-map`,
+  mode,
+  devtool: '#source-map',
 
   entry: [
-    pathTo(`example`, `index.js`),
-    `webpack-dev-server/client?http://localhost:8080`
+    pathTo('example', 'index.js'),
+    'webpack-dev-server/client?http://localhost:8080'
   ],
   output: {
-    filename: `bundle.js`,
-    path: pathTo(`dev`)
+    filename: 'bundle.js',
+    path: pathTo('dev')
   },
   plugins: [
-    plugins.html,
-    plugins.define
+    plugins.html
   ],
   module: {
     rules: [

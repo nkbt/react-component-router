@@ -2,6 +2,7 @@
 
 
 const {
+  mode,
   pathTo,
   PACKAGE_NAME,
   COMPONENT_NAME,
@@ -10,26 +11,26 @@ const {
   resolve,
   stats,
   externals
-} = require(`./common`);
+} = require('./common');
 
 
 module.exports = {
+  mode,
   devtool: false,
-  entry: pathTo(`src`, `index.js`),
+  entry: `${__dirname}/dist.js`,
   output: {
     filename: `${PACKAGE_NAME}.min.js`,
-    path: pathTo(`build`),
+    path: pathTo('build'),
     library: COMPONENT_NAME,
-    libraryTarget: `umd`
+    libraryTarget: 'umd'
   },
   plugins: [
-    plugins.define,
-    plugins.uglify,
+    plugins.emptyPropTypes,
     plugins.loaderOptions
   ],
   module: {
     rules: [
-      loaders.babel
+      loaders.babelProd
     ]
   },
   resolve,

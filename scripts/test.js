@@ -2,16 +2,16 @@
 'use strict';
 
 
-const path = require(`path`);
-const glob = require(`glob`);
-const {CWD} = require(`./utils/bash`);
+const path = require('path');
+const glob = require('glob');
+const {CWD} = require('./utils/bash');
 
 
-require(`babel-register`)({
+require('babel-register')({
   babelrc: false,
   plugins: [
-    `transform-object-rest-spread`,
-    `transform-class-properties`
+    'transform-object-rest-spread',
+    'transform-class-properties'
   ],
   presets: [
     require.resolve('babel-preset-react'),
@@ -30,8 +30,8 @@ require(`babel-register`)({
 
 
 glob
-  .sync(`**/*-test.js`, {
+  .sync('**/*-test.js', {
     realpath: true,
-    cwd: path.resolve(CWD, `test`)
+    cwd: path.resolve(CWD, 'test')
   })
   .forEach(require);
