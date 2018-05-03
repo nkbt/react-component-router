@@ -85,7 +85,15 @@ exports.plugins = {
   }),
   loaderOptions: new webpack.LoaderOptionsPlugin({
     minimize: true
-  })
+  }),
+  emptyPropTypes: new webpack.NormalModuleReplacementPlugin(
+    /prop-types/,
+    resource => {
+      if (!resource.context.includes('node_modules')) {
+        resource.request = './emptyPropTypes';
+      }
+    }
+  )
 };
 
 

@@ -27,6 +27,7 @@ module.exports = {
     minimize: false
   },
   plugins: [
+    plugins.emptyPropTypes,
     new webpack.DefinePlugin({
       'process.env.HISTORY': '"HASH"'
     }),
