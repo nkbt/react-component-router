@@ -36,7 +36,9 @@ export class UrlContainer extends React.PureComponent {
 
 
   isLMB = event => {
-    const {button, metaKey, shiftKey, ctrlKey, altKey} = event;
+    const {
+      button, metaKey, shiftKey, ctrlKey, altKey
+    } = event;
 
     return button === 0 && !metaKey && !shiftKey && !ctrlKey && !altKey;
   };
