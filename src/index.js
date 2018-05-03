@@ -1,5 +1,3 @@
-import '../scripts/utils/webpack/babelHelpers';
-
 export {pathnameRouterHandler} from './pathnameRouterHandler';
 export {componentRouterHandler} from './componentRouterHandler';
 export {RouteContainer} from './RouteContainer';

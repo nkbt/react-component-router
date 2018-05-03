@@ -1706,9 +1706,9 @@ component-emitter@^1.2.1:
   version "1.2.1"
   resolved "https://registry.npmjs.org/component-emitter/-/component-emitter-1.2.1.tgz#137918d6d78283f7df7a6b7c5a63e140e69425e6"
 
-component-router@^3.0.4:
-  version "3.0.4"
-  resolved "https://registry.npmjs.org/component-router/-/component-router-3.0.4.tgz#8c8f198f8dfa7618a20db369e2110e0f869fedfe"
+component-router@^3.0.6:
+  version "3.0.6"
+  resolved "https://registry.npmjs.org/component-router/-/component-router-3.0.6.tgz#32ee2262e546cbab9c1e75915543017abb4fee71"
   dependencies:
     shallow-equal "^1.0.0"
 

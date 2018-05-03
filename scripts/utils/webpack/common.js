@@ -91,7 +91,7 @@ exports.plugins = {
     /prop-types/,
     resource => {
       if (!resource.context.includes('node_modules')) {
-        Object.assign(resource, {request: './emptyPropTypes'});
+        Object.assign(resource, {request: `${__dirname}/emptyPropTypes`});
       }
     }
   )
