@@ -39,7 +39,7 @@
     "csslint": "stylelint --color 'example/**/*.css' --fix",
     "check:csslint": "stylelint --color 'example/**/*.css'",
     "ci": "circleci local execute",
-    "deploy": "gh-pages --dist dist --branch gh-pages --no-history"
+    "deploy": "gh-pages --dist dist --branch gh-pages --no-history --user 'Nikita Butenko <nik@butenko.me>'"
   },
   "peerDependencies": {
     "history": "^5",
