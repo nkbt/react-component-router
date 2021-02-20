@@ -5,6 +5,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const {BundleAnalyzerPlugin} = require('webpack-bundle-analyzer');
 const {WebpackManifestPlugin} = require('webpack-manifest-plugin');
 const autoprefixer = require('autoprefixer');
+const {name} = require('./package.json');
 
 const isProd = process.env.NODE_ENV === 'production';
 
@@ -139,12 +140,14 @@ const optimization = {
 };
 
 const config = {
-  whatever: 'Hellow, World'
+  whatever: 'Hello, World!'
 };
 // eslint-disable-next-line no-template-curly-in-string
-const appConfig = isProd ? '${appConfig}' : JSON.stringify(config, null, 2);
+// const appConfig = isProd ? '${appConfig}' : JSON.stringify(config, null, 2);
+const appConfig = JSON.stringify(config, null, 2);
 
 const htmlPlugin = new HtmlWebpackPlugin({
+  title: name,
   appConfig,
   template: path.resolve(__dirname, './example/index.html'),
   scriptLoading: 'defer',
