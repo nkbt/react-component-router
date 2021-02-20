@@ -1,0 +1,14 @@
+{
+  "all": true,
+  "statements": 1.53,
+  "branches": 0.00,
+  "functions": 0.00,
+  "lines": 0.80,
+  "include": [
+    "src/**/*.js"
+  ],
+  "exclude": [
+    "src/**/*.test.js"
+  ],
+  "report-dir": "reports/coverage"
+}

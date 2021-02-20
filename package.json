@@ -28,7 +28,8 @@
     "lint": "eslint . --fix",
     "check:lint": "eslint .",
     "test": "./scripts/test.js src/**/*.test.js",
-    "check:test": "yarn test",
+    "cov": "nyc --reporter=text ./scripts/test.js src/**/*.test.js",
+    "check:cov": "nyc --reporter=html --check-coverage ./scripts/test.js src/**/*.test.js | tap-junit --output ./reports/test",
     "e2e": "exit 0",
     "check:e2e": "exit 0",
     "deps": "depcheck",
@@ -36,7 +37,8 @@
     "pretty": "prettier ./src --write",
     "check:pretty": "prettier ./src --check",
     "csslint": "stylelint --color 'example/**/*.css' --fix",
-    "check:csslint": "stylelint --color 'example/**/*.css'"
+    "check:csslint": "stylelint --color 'example/**/*.css'",
+    "ci": "circleci local execute"
   },
   "peerDependencies": {
     "history": "^5",
@@ -70,6 +72,7 @@
     "history": "^5.0.0",
     "html-webpack-plugin": "next",
     "mini-css-extract-plugin": "^1.3.3",
+    "nyc": "^15.1.0",
     "postcss": "^8.2.1",
     "postcss-loader": "^4.1.0",
     "prettier": "^2.2.1",
@@ -81,6 +84,7 @@
     "stylelint": "^13.8.0",
     "stylelint-config-prettier": "^8.0.2",
     "stylelint-prettier": "^1.1.2",
+    "tap-junit": "^4.2.0",
     "tape": "^5.1.1",
     "webpack": "^5.11.1",
     "webpack-bundle-analyzer": "^4.3.0",
