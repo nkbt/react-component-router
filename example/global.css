@@ -1,0 +1,15 @@
+:global body {
+  font: 16px Helvetica, Arial, sans-serif;
+}
+
+:global h1 {
+  font-size: 3em;
+  margin: 0;
+  color: rgba(50, 50, 50, 1);
+}
+
+:global h2 {
+  font-size: 2em;
+  margin: 0;
+  color: rgba(50, 50, 50, 0.8);
+}

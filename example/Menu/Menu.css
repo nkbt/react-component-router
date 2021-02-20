@@ -1,0 +1,14 @@
+.e {
+  display: flex;
+  flex-direction: row;
+  list-style: none;
+  justify-content: flex-start;
+  align-items: center;
+  height: 2em;
+  margin: 0;
+  padding: 0;
+}
+
+.e > li + li {
+  margin-left: 1em;
+}

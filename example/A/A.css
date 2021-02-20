@@ -1,0 +1,8 @@
+.e {
+  color: #06c;
+  text-decoration: underline;
+}
+
+.e[data-active='true'] {
+  color: #c30;
+}

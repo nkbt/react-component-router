@@ -1,38 +1,19 @@
-version: 2
+version: 2.1
 
 
 jobs:
   build:
     working_directory: ~/app
     docker:
-      - image: circleci/node:8.7.0
-      - image: selenium/standalone-firefox:3.4.0
-
+      - image: cimg/node:14.15.3-browsers
     steps:
       - checkout
-
-
-      - restore_cache:
-          key: deps-{{ checksum "yarn.lock" }}
-
-
-      - run: yarn install --pure-lockfile
-
-
-      - save_cache:
-          key: deps-{{ checksum "yarn.lock" }}
-          paths:
-            - node_modules
-
-
-      - run: yarn lint
-
-
-      - run: yarn test
-
-
-      - run:
-          name: yarn e2e
-          command: |
-            export DOCKER_IP=$(ifconfig | grep "inet addr:" | grep "Bcast:0.0.0.0" | cut -d: -f2 | awk '{ print $1}')
-            yarn e2e
+      - run: yarn set version berry
+      - run: yarn install --immutable --immutable-cache
+      - run: yarn check:deps
+      - run: yarn check:lint
+      - run: yarn check:csslint
+      - run: yarn check:pretty
+      - run: yarn check:test
+      - run: yarn check:e2e
+      - run: yarn build

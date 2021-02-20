@@ -1,0 +1,10 @@
+.e {
+  width: 800px;
+  margin: 2em;
+}
+
+.content {
+  margin: 2em 0;
+  padding: 2em;
+  border: 1px solid rgba(200, 200, 200, 0.5);
+}
