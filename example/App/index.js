@@ -1,116 +1,28 @@
 import React from 'react';
-import {locationHistory, locationHash} from 'component-router';
-import {
-  Url,
-  RouteContainer,
-  componentRouterHandler,
-  pathnameRouterHandler,
-  Provider
-} from '../../src';
-import {createStore} from './store';
+import {useValue} from '~';
+import {A} from '../A';
+import {Menu} from '../Menu';
+import {Home} from './Home';
+import {Foo} from './Foo';
+import {Bar} from './Bar';
 
+import css from './App.css';
 
-const store = createStore();
-if (process.env.HISTORY === 'HASH') {
-  // When publishing to GitHub Pages we cannon use HTML5 history navigation
-  locationHash({store, namespace: 'componentRouter'});
-} else {
-  locationHistory({store, namespace: 'componentRouter'});
-}
+export function App() {
+  const page = useValue('page');
 
-
-const NotFound = () => <h2>Not Found.</h2>;
-
-
-const ComponentRouteHandler = componentRouterHandler({
-  namespace: 'component',
-  defaultValue: 'bla',
-  notFound: NotFound
-})({
-  bla: () => <h3>Bla</h3>,
-  baz: () => <h3>Baz</h3>
-});
-
-
-const Bar = () => (
-  <div className="content">
-    <h2>Bar</h2>
-  </div>
-);
-
-
-const Foo = props => (
-  <div className="content">
-    <h2>Foo</h2>
-    <section>
-      <ComponenentLinks />
-    </section>
-    <section className="content">
-      <ComponentRouteHandler {...props} />
-    </section>
-  </div>
-);
-
-
-const PathnameRouteHandler = pathnameRouterHandler({
-  notFound: NotFound
-})({
-  '/foo': Foo,
-  '/bar': Bar
-});
-
-
-const GlobalLinks = () => (
-  <ul>
-    <li>
-      <Url href="/foo" className="tab">/foo</Url>
-    </li>
-    <li>
-      <Url href="/bar" className="tab">/bar</Url>
-    </li>
-  </ul>
-);
-
-
-const ComponenentLinks = () => (
-  <span>
-    <Url query={{component: 'bla'}} className="link">component: bla</Url>
-    <Url query={{component: 'baz'}} className="link">component: baz</Url>
-  </span>
-);
-
-
-const Header = () => (
-  <header className="header">
-    <nav className="nav">
-      <GlobalLinks />
-    </nav>
-  </header>
-);
-
-
-const App = () => (
-  <Provider store={store} namespace="componentRouter">
-    <div className="app">
-      <h1>react-component-router</h1>
-      <RouteContainer>
-        {routingState => (
-          <div>
-            <Header />
-            <PathnameRouteHandler
-              pathname={routingState.pathname}
-              route={routingState.currentRoute.route}
-              params={{...routingState.currentRoute.params, ...routingState.query}} />
-            <section className="content">
-              Routing state:
-              <pre>{JSON.stringify(routingState, null, 2)}</pre>
-            </section>
-          </div>
-        )}
-      </RouteContainer>
+  return (
+    <div className={css.e}>
+      <Menu>
+        <A query={{page: 'home'}}>Home</A>
+        <A query={{page: 'foo'}}>Foo</A>
+        <A query={{page: 'bar'}}>Bar</A>
+      </Menu>
+      <section className={css.content}>
+        {page === 'home' && <Home />}
+        {page === 'foo' && <Foo />}
+        {page === 'bar' && <Bar />}
+      </section>
     </div>
-  </Provider>
-);
-
-
-export default App;
+  );
+}

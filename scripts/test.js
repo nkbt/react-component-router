@@ -1,37 +1,22 @@
 #!/usr/bin/env node
-'use strict';
 
-
-const path = require('path');
-const glob = require('glob');
-const {CWD} = require('./utils/bash');
-
-
-require('babel-register')({
-  babelrc: false,
-  plugins: [
-    'transform-object-rest-spread',
-    'transform-class-properties'
-  ],
+require('@babel/register')({
   presets: [
-    require.resolve('babel-preset-react'),
-    [require.resolve('babel-preset-env'), {
-      targets: {
-        node: '7'
-      },
-      modules: 'commonjs',
-      loose: true,
-      uglify: false
-    }]
+    require.resolve('@babel/preset-react'),
+    [
+      require.resolve('@babel/preset-env'),
+      {
+        modules: 'commonjs',
+        loose: true,
+        targets: {
+          node: 14
+        }
+      }
+    ]
   ],
   retainLines: true,
-  comments: false
+  comments: false,
+  babelrc: false
 });
 
-
-glob
-  .sync('**/*-test.js', {
-    realpath: true,
-    cwd: path.resolve(CWD, 'test')
-  })
-  .forEach(require);
+require('tape/bin/tape');

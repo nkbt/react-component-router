@@ -1,0 +1,10 @@
+ignores: [
+  "~",
+  "webpack-dev-server",
+  "eslint-import-resolver-webpack",
+  "eslint-import-resolver-node",
+  "buffer"
+]
+ignore-dirs: [
+  "dist"
+]

@@ -1,13 +1,9 @@
-/* global document */
+import {bootstrap} from './bootstrap';
 
-import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './App';
-import './reset.css';
-import './app.css';
+bootstrap();
 
-const appRoot = document.createElement('div');
-
-appRoot.id = 'app';
-document.body.appendChild(appRoot);
-ReactDOM.render(<App />, appRoot);
+if (module.hot) {
+  module.hot.accept('./bootstrap', () => {
+    bootstrap();
+  });
+}
