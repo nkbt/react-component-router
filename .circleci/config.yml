@@ -2,7 +2,10 @@ version: 2.1
 
 
 jobs:
-  build:
+  ui:
+    parameters:
+      stage:
+        type: string
     working_directory: ~/app
     docker:
       - image: cimg/node:14.15.3-browsers
@@ -21,13 +24,91 @@ jobs:
             - .yarn/build-state.yml
 
       - run: yarn check:deps
+
       - run: yarn check:lint
       - run: yarn check:csslint
       - run: yarn check:pretty
+
       - run: yarn check:cov
-      - run: yarn check:e2e
-      - run: yarn build
       - store_test_results:
           path: reports/test
+
+      - run: yarn check:e2e
       - store_artifacts:
           path: reports
+
+      - run: yarn build
+
+      - run:
+          name: Deploy to Github Pages
+          command: |
+            case << parameters.stage >> in
+              "dev")
+                echo "Skipping deploy for DEV"
+                ;;
+
+              "staging")
+                echo "Deploying to gh-pages for STAGING"
+                yarn deploy
+                ;;
+
+              "prod")
+                echo "Deploying to gh-pages for PROD"
+                yarn deploy
+                ;;
+
+              *)
+                echo "Skipping deploy for UNKNOWN"
+                ;;
+            esac
+
+
+      - store_artifacts:
+          path: reports
+
+
+
+filters-dev: &filters-dev
+  branches:
+    ignore: /^master$/
+  tags:
+    ignore: /.*/
+
+filters-staging: &filters-staging
+  branches:
+    only: /^master$/
+  tags:
+    ignore: /.*/
+
+filters-prod: &filters-prod
+  branches:
+    ignore: /.*/
+  tags:
+    only: /^v\d+\.\d+\.\d+$/
+
+
+workflows:
+  version: 2
+  dev:
+    jobs:
+      - ui:
+          name: "dev"
+          stage: "dev"
+          filters:
+            <<: *filters-dev
+
+  staging:
+    jobs:
+      - ui:
+          name: "staging"
+          stage: "staging"
+          filters:
+            <<: *filters-staging
+
+  prod:
+    jobs:
+      - ui:
+          name: "prod"
+          stage: "prod"
+          filters:
+            <<: *filters-prod
