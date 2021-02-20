@@ -161,10 +161,8 @@ const productionPlugins = [
   new WebpackManifestPlugin(),
   new BundleAnalyzerPlugin({
     analyzerMode: 'static',
-    reportFilename: path.resolve(__dirname, 'reports', 'webpack.html'),
-    openAnalyzer: false,
-    generateStatsFile: true,
-    statsFilename: path.resolve(__dirname, 'reports', 'webpack.json')
+    reportFilename: path.resolve(__dirname, 'reports/webpack/bundle-analyzer.html'),
+    openAnalyzer: false
   })
 ];
 

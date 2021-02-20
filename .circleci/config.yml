@@ -8,12 +8,26 @@ jobs:
       - image: cimg/node:14.15.3-browsers
     steps:
       - checkout
-      - run: yarn set version berry
-      - run: yarn install --immutable --immutable-cache
+      #- run: yarn set version berry
+
+      - restore_cache:
+          keys:
+            - yarn-build-state-{{ checksum ".yarn/build-state.yml" }}
+      - run: test -e .yarn/build-state.yml || yarn install --immutable --immutable-cache
+      - save_cache:
+          key: yarn-build-state-{{ checksum ".yarn/build-state.yml" }}
+          paths:
+            - .yarn/unplugged
+            - .yarn/build-state.yml
+
       - run: yarn check:deps
       - run: yarn check:lint
       - run: yarn check:csslint
       - run: yarn check:pretty
-      - run: yarn check:test
+      - run: yarn check:cov
       - run: yarn check:e2e
       - run: yarn build
+      - store_test_results:
+          path: reports/test
+      - store_artifacts:
+          path: reports
