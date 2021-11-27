@@ -9,14 +9,12 @@
     "externals": {
       "react": "React",
       "react-dom": "ReactDOM",
-      "history": "History",
-      "qs": "Qs"
+      "history": "History"
     },
     "include": [
       "https://unpkg.com/react@16.0.0/umd/react.production.min.js",
       "https://unpkg.com/react-dom@16.0.0/umd/react-dom.production.min.js",
       "https://unpkg.com/redux/dist/redux.min.js",
-      "https://unpkg.com/qs/dist/qs.js",
       "https://unpkg.com/history/umd/history.min.js",
       "https://unpkg.com/component-router/build/component-router.min.js",
       "https://unpkg.com/react-component-router/build/react-component-router.min.js"
@@ -44,8 +42,10 @@
   "peerDependencies": {
     "history": "^5",
     "prop-types": "^15",
-    "qs": "^6",
     "react": "^17"
+  },
+  "dependencies": {
+    "@nkbt/shallow-equal-objects": "^1.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.10",
@@ -79,7 +79,6 @@
     "postcss-loader": "^4.1.0",
     "prettier": "^2.2.1",
     "prop-types": "^15.7.2",
-    "qs": "^6.9.4",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "style-loader": "^2.0.0",

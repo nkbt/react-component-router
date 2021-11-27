@@ -47,7 +47,10 @@ const getLocalIdent = ({resourcePath}, localIdentName, localName) => {
 
 const babelLoaderRule = {
   test: /\.js$/,
-  exclude: /node_modules/,
+  include: [/\/src\//, /\/example\//, /\/node_modules\/@nkbt\//],
+  resolve: {
+    fullySpecified: false
+  },
   use: {
     loader: require.resolve('babel-loader'),
     options: {

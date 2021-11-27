@@ -41,6 +41,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@babel/preset-env", "virtual:a24fed287592bf5c5958c7b7c598d5f88da63c8ccc8fb9736064bfaff539d7220c66b9f998b9f957181675e05220efd4b7ce3525752a2d0a53aab9838fa761ba#npm:7.12.11"],
             ["@babel/preset-react", "virtual:a24fed287592bf5c5958c7b7c598d5f88da63c8ccc8fb9736064bfaff539d7220c66b9f998b9f957181675e05220efd4b7ce3525752a2d0a53aab9838fa761ba#npm:7.12.10"],
             ["@babel/register", "virtual:a24fed287592bf5c5958c7b7c598d5f88da63c8ccc8fb9736064bfaff539d7220c66b9f998b9f957181675e05220efd4b7ce3525752a2d0a53aab9838fa761ba#npm:7.12.13"],
+            ["@nkbt/shallow-equal-objects", "npm:1.0.0"],
             ["autoprefixer", "virtual:a24fed287592bf5c5958c7b7c598d5f88da63c8ccc8fb9736064bfaff539d7220c66b9f998b9f957181675e05220efd4b7ce3525752a2d0a53aab9838fa761ba#npm:10.1.0"],
             ["babel-eslint", "virtual:a24fed287592bf5c5958c7b7c598d5f88da63c8ccc8fb9736064bfaff539d7220c66b9f998b9f957181675e05220efd4b7ce3525752a2d0a53aab9838fa761ba#npm:10.1.0"],
             ["babel-loader", "virtual:a24fed287592bf5c5958c7b7c598d5f88da63c8ccc8fb9736064bfaff539d7220c66b9f998b9f957181675e05220efd4b7ce3525752a2d0a53aab9838fa761ba#npm:8.2.2"],
@@ -68,7 +69,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["postcss-loader", "virtual:a24fed287592bf5c5958c7b7c598d5f88da63c8ccc8fb9736064bfaff539d7220c66b9f998b9f957181675e05220efd4b7ce3525752a2d0a53aab9838fa761ba#npm:4.1.0"],
             ["prettier", "npm:2.2.1"],
             ["prop-types", "npm:15.7.2"],
-            ["qs", "npm:6.9.4"],
             ["react", "npm:17.0.1"],
             ["react-dom", "virtual:a24fed287592bf5c5958c7b7c598d5f88da63c8ccc8fb9736064bfaff539d7220c66b9f998b9f957181675e05220efd4b7ce3525752a2d0a53aab9838fa761ba#npm:17.0.1"],
             ["style-loader", "virtual:a24fed287592bf5c5958c7b7c598d5f88da63c8ccc8fb9736064bfaff539d7220c66b9f998b9f957181675e05220efd4b7ce3525752a2d0a53aab9838fa761ba#npm:2.0.0"],
@@ -2410,6 +2410,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/@istanbuljs-schema-npm-0.1.3-466bd3eaaa-d84c326335.zip/node_modules/@istanbuljs/schema/",
           "packageDependencies": [
             ["@istanbuljs/schema", "npm:0.1.3"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["@nkbt/shallow-equal-objects", [
+        ["npm:1.0.0", {
+          "packageLocation": "./.yarn/cache/@nkbt-shallow-equal-objects-npm-1.0.0-92b4d28f45-af0363b4c7.zip/node_modules/@nkbt/shallow-equal-objects/",
+          "packageDependencies": [
+            ["@nkbt/shallow-equal-objects", "npm:1.0.0"]
           ],
           "linkType": "HARD",
         }]
@@ -10873,13 +10882,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["qs", "npm:6.7.0"]
           ],
           "linkType": "HARD",
-        }],
-        ["npm:6.9.4", {
-          "packageLocation": "./.yarn/cache/qs-npm-6.9.4-7b853cfa85-beba62d1e1.zip/node_modules/qs/",
-          "packageDependencies": [
-            ["qs", "npm:6.9.4"]
-          ],
-          "linkType": "HARD",
         }]
       ]],
       ["query-ast", [
@@ -11003,6 +11005,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@babel/preset-env", "virtual:a24fed287592bf5c5958c7b7c598d5f88da63c8ccc8fb9736064bfaff539d7220c66b9f998b9f957181675e05220efd4b7ce3525752a2d0a53aab9838fa761ba#npm:7.12.11"],
             ["@babel/preset-react", "virtual:a24fed287592bf5c5958c7b7c598d5f88da63c8ccc8fb9736064bfaff539d7220c66b9f998b9f957181675e05220efd4b7ce3525752a2d0a53aab9838fa761ba#npm:7.12.10"],
             ["@babel/register", "virtual:a24fed287592bf5c5958c7b7c598d5f88da63c8ccc8fb9736064bfaff539d7220c66b9f998b9f957181675e05220efd4b7ce3525752a2d0a53aab9838fa761ba#npm:7.12.13"],
+            ["@nkbt/shallow-equal-objects", "npm:1.0.0"],
             ["autoprefixer", "virtual:a24fed287592bf5c5958c7b7c598d5f88da63c8ccc8fb9736064bfaff539d7220c66b9f998b9f957181675e05220efd4b7ce3525752a2d0a53aab9838fa761ba#npm:10.1.0"],
             ["babel-eslint", "virtual:a24fed287592bf5c5958c7b7c598d5f88da63c8ccc8fb9736064bfaff539d7220c66b9f998b9f957181675e05220efd4b7ce3525752a2d0a53aab9838fa761ba#npm:10.1.0"],
             ["babel-loader", "virtual:a24fed287592bf5c5958c7b7c598d5f88da63c8ccc8fb9736064bfaff539d7220c66b9f998b9f957181675e05220efd4b7ce3525752a2d0a53aab9838fa761ba#npm:8.2.2"],
@@ -11030,7 +11033,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["postcss-loader", "virtual:a24fed287592bf5c5958c7b7c598d5f88da63c8ccc8fb9736064bfaff539d7220c66b9f998b9f957181675e05220efd4b7ce3525752a2d0a53aab9838fa761ba#npm:4.1.0"],
             ["prettier", "npm:2.2.1"],
             ["prop-types", "npm:15.7.2"],
-            ["qs", "npm:6.9.4"],
             ["react", "npm:17.0.1"],
             ["react-dom", "virtual:a24fed287592bf5c5958c7b7c598d5f88da63c8ccc8fb9736064bfaff539d7220c66b9f998b9f957181675e05220efd4b7ce3525752a2d0a53aab9838fa761ba#npm:17.0.1"],
             ["style-loader", "virtual:a24fed287592bf5c5958c7b7c598d5f88da63c8ccc8fb9736064bfaff539d7220c66b9f998b9f957181675e05220efd4b7ce3525752a2d0a53aab9838fa761ba#npm:2.0.0"],

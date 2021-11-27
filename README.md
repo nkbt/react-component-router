@@ -7,16 +7,15 @@ Routing solution for React, loosely based on the `component-router`
 ### NPM
 
 ```sh
-npm install --save react history qs react-component-router
+npm install --save react history react-component-router
 ```
 
-Don't forget to manually install peer dependencies (`react`, `history`, `qs`).
+Don't forget to manually install peer dependencies (`react`, `history`).
 
 
 ### 1998 Script Tag:
 ```html
 <script src="https://unpkg.com/react/umd/react.production.min.js"></script>
-<script src="https://unpkg.com/qs/dist/qs.js"></script>
 <script src="https://unpkg.com/history/umd/history.min.js"></script>
 <script src="https://unpkg.com/react-component-router/build/react-component-router.min.js"></script>
 (Module exposed as `ReactComponentRouter`)

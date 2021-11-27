@@ -29,13 +29,13 @@ jobs:
       - run: yarn check:csslint
       - run: yarn check:pretty
 
-      - run: yarn check:cov
-      - store_test_results:
-          path: reports/test
+      #      - run: yarn check:cov
+      #      - store_test_results:
+      #          path: reports/test
 
-      - run: yarn check:e2e
-      - store_artifacts:
-          path: reports
+      #      - run: yarn check:e2e
+      #      - store_artifacts:
+      #          path: reports
 
       - run: yarn build
 

@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import {useAdd, useValue} from '~';
+import {useAdd, useValue, useRemove} from '~';
 import {Menu} from '../../Menu';
 import {A} from '../../A';
 
@@ -9,10 +9,12 @@ export function Bar() {
   const subpage = useValue('bar');
 
   const addDefaultParam = useAdd();
+  const removeDefaultParam = useRemove();
 
   useEffect(() => {
     addDefaultParam({bar: 'no'});
-  }, [addDefaultParam]);
+    return () => removeDefaultParam({bar: 'no'});
+  }, [addDefaultParam, removeDefaultParam]);
 
   return (
     <div className={css.e}>
