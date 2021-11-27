@@ -1,11 +1,12 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const {BundleAnalyzerPlugin} = require('webpack-bundle-analyzer');
 const {WebpackManifestPlugin} = require('webpack-manifest-plugin');
 const autoprefixer = require('autoprefixer');
 const {name} = require('./package.json');
+
+const DIR = path.resolve(__dirname);
 
 const isProd = process.env.NODE_ENV === 'production';
 
@@ -54,53 +55,15 @@ const babelLoaderRule = {
   use: {
     loader: require.resolve('babel-loader'),
     options: {
-      presets: [
-        require.resolve('@babel/preset-react'),
-        [
-          require.resolve('@babel/preset-env'),
-          {
-            modules: false,
-            loose: true,
-            targets: {
-              browsers: [
-                'last 1 Chrome version',
-                'last 1 iOS version',
-                'last 1 Safari version',
-                'last 1 Firefox version',
-                'last 1 Edge version'
-              ]
-            }
-          }
-        ]
-      ],
-      env: {
-        production: {
-          plugins: [
-            [
-              require.resolve('babel-plugin-transform-react-remove-prop-types'),
-              {removeImport: true}
-            ]
-          ]
-        }
-      },
-      babelrc: false,
-      cacheDirectory: false
+            configFile: path.resolve(DIR, 'babel.config.js')
+
     }
   }
 };
 
 const fileLoaderRule = {
   test: /\.(svg|png|jpg|ico|gif|woff|woff2|ttf|eot|doc|pdf|zip|wav|avi|txt)$/,
-  use: [
-    // "file" loader makes sure those assets get served
-    {
-      loader: require.resolve('file-loader'),
-      options: {
-        name: isProd ? '[name].[contenthash:8].[ext]' : '[name].[ext]',
-        outputPath: 'statics'
-      }
-    }
-  ]
+  type: 'asset/resource'
 };
 
 const postcssLoader = {
@@ -130,17 +93,34 @@ const cssLoaderRule = {
   use: isProd ? [extractCssLoader, cssLoader, postcssLoader] : [styleLoader, cssLoader]
 };
 
-const optimization = {
-  splitChunks: {
-    cacheGroups: {
-      vendor: {
-        test: /[\\/]node_modules[\\/]/,
-        name: 'vendor',
-        chunks: 'all'
-      }
+const splitChunks = {
+  chunks: 'all',
+  hidePathInfo: true,
+  automaticNameDelimiter: '--',
+  name: false,
+  cacheGroups: {
+    vendors: {
+      name: 'vendors',
+      test: /[\\/]node_modules[\\/]/
     }
   }
 };
+
+
+const optimization = isProd
+  ? {
+      splitChunks,
+      moduleIds: 'deterministic',
+      chunkIds: 'deterministic',
+      minimize: true
+    }
+  : {
+      splitChunks,
+      moduleIds: 'named',
+      chunkIds: 'named',
+      emitOnErrors: false,
+      minimize: false
+    };
 
 const config = {
   whatever: 'Hello, World!'
@@ -167,8 +147,10 @@ const productionPlugins = [
   new WebpackManifestPlugin(),
   new BundleAnalyzerPlugin({
     analyzerMode: 'static',
-    reportFilename: path.resolve(__dirname, 'reports/webpack/bundle-analyzer.html'),
-    openAnalyzer: false
+    reportFilename: path.resolve(DIR, 'reports', 'webpack.html'),
+    openAnalyzer: false,
+    generateStatsFile: true,
+    statsFilename: path.resolve(DIR, 'reports', 'webpack.json')
   })
 ];
 
@@ -180,27 +162,47 @@ module.exports = {
   output: {
     publicPath: '',
     filename: isProd ? '[name].[contenthash:8].js' : '[name].js',
-    chunkFilename: isProd ? '[name].[contenthash:8].js' : '[name].js',
-    path: path.join(__dirname, 'dist')
+    chunkFilename: isProd ? 'chunk/[name].[contenthash:8].js' : '[name].js',
+    assetModuleFilename: '[path][name].[contenthash:8][ext]',
+    path: path.join(DIR, 'dist'),
+    clean: true
   },
-  plugins: [htmlPlugin, new CleanWebpackPlugin()].concat(isProd ? productionPlugins : []),
-  resolve: {
-    alias: {
-      '~': path.resolve(__dirname, './src')
-    }
-  },
+  plugins: [htmlPlugin].concat(isProd ? productionPlugins : []),
   externals: {},
   module: {
     rules: [babelLoaderRule, cssLoaderRule, fileLoaderRule]
   },
-  devServer: {
-    contentBase: path.join(__dirname, 'dist'),
-    compress: true,
+    devServer: {
+    port: '8080',
+
     hot: true,
+    liveReload: false,
+
     historyApiFallback: {
       index: '/index.html'
     },
-    port: 8080,
-    writeToDisk: true
-  }
+
+    devMiddleware: {
+      writeToDisk: true,
+      publicPath: '/'
+    },
+
+    client: {
+      logging: 'log',
+      overlay: true,
+      progress: false
+    },
+
+    static: {
+      publicPath: '/',
+      serveIndex: true,
+      watch: false
+    },
+
+    headers: {'Access-Control-Allow-Origin': '*'},
+    allowedHosts: 'all',
+    open: false,
+    compress: true
+  },
+  stats: {errorDetails: true}
 };

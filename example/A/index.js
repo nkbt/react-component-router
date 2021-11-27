@@ -1,6 +1,6 @@
 import React, {useCallback} from 'react';
 import PropTypes from 'prop-types';
-import {useCleanHref, useIsActive, useNavigate} from '~';
+import {useCleanHref, useIsActive, useNavigate} from '../../src';
 import css from './A.css';
 
 export function A({query, children, ...rest}) {

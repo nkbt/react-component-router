@@ -8,35 +8,14 @@ jobs:
         type: string
     working_directory: ~/app
     docker:
-      - image: cimg/node:14.15.3-browsers
+      - image: cimg/node:16.3.0
     steps:
       - checkout
-      #- run: yarn set version berry
-
-      - restore_cache:
-          keys:
-            - yarn-build-state-{{ checksum ".yarn/build-state.yml" }}
-      - run: test -e .yarn/build-state.yml || yarn install --immutable --immutable-cache
-      - save_cache:
-          key: yarn-build-state-{{ checksum ".yarn/build-state.yml" }}
-          paths:
-            - .yarn/unplugged
-            - .yarn/build-state.yml
-
+      - run: yarn install --immutable --immutable-cache
       - run: yarn check:deps
-
       - run: yarn check:lint
       - run: yarn check:csslint
       - run: yarn check:pretty
-
-      #      - run: yarn check:cov
-      #      - store_test_results:
-      #          path: reports/test
-
-      #      - run: yarn check:e2e
-      #      - store_artifacts:
-      #          path: reports
-
       - run: yarn build
 
       - run:
