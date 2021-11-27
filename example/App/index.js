@@ -1,5 +1,5 @@
 import React from 'react';
-import {useValue} from '~';
+import {useValue} from '../../src';
 import {A} from '../A';
 import {Menu} from '../Menu';
 import {Home} from './Home';

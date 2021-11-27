@@ -4,18 +4,12 @@ import {queryToSearch, safeQuery} from './codec';
 import {ADD, NAVIGATE, REMOVE, RESTORE} from './constants';
 
 export function isEqualState(stateA, stateB) {
-  return (
-    shallowEqualObjects(stateA.query, stateB.query) &&
-    shallowEqualObjects(stateA.params, stateB.params)
-  );
+  return shallowEqualObjects(stateA.query, stateB.query) && shallowEqualObjects(stateA.params, stateB.params);
 }
 
 export function cleanupQuery(query, params) {
   return Object.keys(query).reduce(
-    (clean, key) =>
-      key in params && query[key] === params[key]
-        ? clean
-        : Object.assign(clean, {[key]: query[key]}),
+    (clean, key) => (key in params && query[key] === params[key] ? clean : Object.assign(clean, {[key]: query[key]})),
     {}
   );
 }

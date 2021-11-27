@@ -1,6 +1,6 @@
 import React from 'react';
 import {render} from 'react-dom';
-import {Router, useLocationSync} from '~';
+import {Router, useLocationSync} from '../src';
 import {App} from './App';
 
 import './global.css';

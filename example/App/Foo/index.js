@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import {useAdd, useValue, useRemove} from '~';
+import {useAdd, useValue, useRemove} from '../../../src';
 import {Menu} from '../../Menu';
 import {A} from '../../A';
 
