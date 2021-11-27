@@ -5,9 +5,8 @@ module.exports = {
   ],
   env: {
     production: {
-      plugins: [
-        require.resolve('babel-plugin-transform-react-remove-prop-types'),
-        {removeImport: true}
+      "plugins": [
+        [require.resolve("babel-plugin-transform-react-remove-prop-types"), {"removeImport": true}]
       ]
     }
   }
